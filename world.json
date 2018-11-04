@@ -1,0 +1,379 @@
+{
+  "cgroups": [{
+      "name": "kaytava",
+      "groups": [],
+      "lights": [
+        "@1.1.2.7",
+        "@1.1.2.11",
+        "@1.1.2.13",
+        "@1.1.2.14",
+        "@1.1.2.8"
+      ]
+    },
+    {
+      "name": "keittio",
+      "groups": [],
+      "lights": [
+        "@1.1.2.6",
+        "@1.1.2.12"
+      ]
+    },
+
+    {
+      "name": "main",
+      "groups": [
+        "7202",
+        "7201"
+      ],
+      "lights": []
+    },
+    {
+      "name": "all",
+      "groups": [
+        "7202",
+        "7201",
+        "732",
+        "729",
+        "726",
+        "725",
+        "723"
+      ],
+      "lights": ["@1.1.2.16"]
+    },
+    {
+      "name": "bigroom",
+      "groups": [
+        "7202",
+        "7201",
+        "723"
+      ],
+      "lights": []
+    }
+
+  ],
+  "groups": [{
+    "id": "723",
+    "name": "Lobby",
+    "devices": [{
+      "name": "723_Aula_1_neukkari",
+      "type": "light",
+      "address": "@1.1.2.4",
+      "x": 8,
+      "y": 2
+    }, {
+      "name": "723_Aula_2_tolp_vali",
+      "type": "light",
+      "address": "@1.1.2.5",
+      "x": 17,
+      "y": 6
+    }, {
+      "name": "723_Aula_3_keittio",
+      "type": "light",
+      "address": "@1.1.2.6",
+      "x": 1,
+      "y": 7
+    }, {
+      "name": "723_Aula_4_eteinen_kaytava",
+      "type": "light",
+      "address": "@1.1.2.7",
+      "x": 6,
+      "y": 4
+    }, {
+      "name": "723_Aula_5_silentin_kaytava",
+      "type": "light",
+      "address": "@1.1.2.8",
+      "x": 21,
+      "y": 2
+    }, {
+      "name": "723_Aula_6_tolp_vali",
+      "type": "light",
+      "address": "@1.1.2.9",
+      "x": 8,
+      "y": 6
+    }, {
+      "name": "723_Aula_7_etuovi",
+      "type": "light",
+      "address": "@1.1.2.10",
+      "x": 4,
+      "y": 2
+    }, {
+      "name": "723_Aula_8_kaytava_puhelinkopin_edusta",
+      "type": "light",
+      "address": "@1.1.2.11",
+      "x": 19,
+      "y": 4
+    }, {
+      "name": "723_Aula_9_keittio_2",
+      "type": "light",
+      "address": "@1.1.2.12",
+      "x": 4,
+      "y": 7
+    }, {
+      "name": "723_Aula_10_kaytava_neukkarin_edusta",
+      "type": "light",
+      "address": "@1.1.2.13",
+      "x": 10,
+      "y": 4
+    }, {
+      "name": "723_Aula_11_kaytava_vessan_edusta",
+      "type": "light",
+      "address": "@1.1.2.14",
+      "x": 14,
+      "y": 4
+    }, {
+      "name": "723_Aula_P1",
+      "type": "button",
+      "address": "@1.1.2.58"
+    }]
+  }, {
+    "id": "725",
+    "name": "MeetingRoom",
+    "devices": [{
+      "name": "725_Neuvottelu_1_etu",
+      "type": "light",
+      "address": "@1.1.2.1"
+    }, {
+      "name": "725_Neuvottelu_2_kesk",
+      "type": "light",
+      "address": "@1.1.2.2"
+    }, {
+      "name": "725_Neuvottelu_3_taka",
+      "type": "light",
+      "address": "@1.1.2.3"
+    }, {
+      "name": "725_Neuvottelu_MS1",
+      "type": "ms",
+      "address": "@1.1.2.48"
+    }, {
+      "name": "725_Neuvottelu_P1",
+      "type": "button",
+      "address": "@1.1.2.57"
+    }]
+  }, {
+    "id": "726",
+    "name": "Silent room",
+    "devices": [{
+      "name": "726_Neuvottelu_1_etu_kesk",
+      "type": "light",
+      "address": "@1.1.1.18"
+    }, {
+      "name": "726_Neuvottelu_2_etu_vas",
+      "type": "light",
+      "address": "@1.1.1.19"
+    }, {
+      "name": "726_Neuvottelu_3_etu_oik",
+      "type": "light",
+      "address": "@1.1.1.20"
+    }, {
+      "name": "726_Neuvottelu_4_taka_vas",
+      "type": "light",
+      "address": "@1.1.1.21"
+    }, {
+      "name": "726_Neuvottelu_5_taka_kesk",
+      "type": "light",
+      "address": "@1.1.1.22"
+    }, {
+      "name": "726_Neuvottelu_6_taka_oik",
+      "type": "light",
+      "address": "@1.1.1.23"
+    }, {
+      "name": "726_Neuvottelu_7_kesk_vas",
+      "type": "light",
+      "address": "@1.1.1.24"
+    }, {
+      "name": "726_Neuvottelu_8_kesk_kesk",
+      "type": "light",
+      "address": "@1.1.1.25"
+    }, {
+      "name": "726_Neuvottelu_9_kesk_oik",
+      "type": "light",
+      "address": "@1.1.1.26"
+    }, {
+      "name": "726_Neuvottelu_MS1",
+      "type": "ms",
+      "address": "@1.1.1.51"
+    }, {
+      "name": "726_Neuvottelu_P1",
+      "type": "button",
+      "address": "@1.1.1.62"
+    }]
+  }, {
+    "id": "729",
+    "name": "Phonebooth",
+    "devices": [{
+      "name": "729_Puhelin_1",
+      "type": "light",
+      "address": "@1.1.2.15"
+    }, {
+      "name": "729_Puhelin_MS1",
+      "type": "ms",
+      "address": "@1.1.2.49"
+    }]
+  }, {
+    "name": "730",
+    "name": "CEO's Office",
+    "devices": [{
+      "name": "730_Puhelin_1",
+      "type": "light",
+      "address": "@1.1.2.16"
+    }, {
+      "name": "730_Puhelin_MS1",
+      "type": "ms",
+      "address": "@1.1.2.50"
+    }]
+  }, {
+    "id": "732",
+    "name": "Datacenter",
+    "devices": [{
+      "name": "732_ATK_1",
+      "type": "light",
+      "address": "@1.1.2.17"
+    }, {
+      "name": "732_ATK_MS1",
+      "type": "ms",
+      "address": "@1.1.2.51"
+    }]
+  }, {
+    "id": "7201",
+    "name": "Main Left",
+    "devices": [{
+      "name": "720.1_Avotsto_1",
+      "type": "light",
+      "address": "@1.1.1.1",
+      "x": 24,
+      "y": 14
+    }, {
+      "name": "720.1_Avotsto_2",
+      "type": "light",
+      "address": "@1.1.1.2",
+      "x": 21,
+      "y": 14
+    }, {
+      "name": "720.1_Avotsto_3",
+      "type": "light",
+      "address": "@1.1.1.3",
+      "x": 21,
+      "y": 10
+    }, {
+      "name": "720.1_Avotsto_4",
+      "type": "light",
+      "address": "@1.1.1.4",
+      "x": 18,
+      "y": 10
+    }, {
+      "name": "720.1_Avotsto_5",
+      "type": "light",
+      "address": "@1.1.1.5",
+      "x": 18,
+      "y": 14
+    }, {
+      "name": "720.1_Avotsto_6",
+      "type": "light",
+      "address": "@1.1.1.6",
+      "x": 15,
+      "y": 14
+    }, {
+      "name": "720.1_Avotsto_7",
+      "type": "light",
+      "address": "@1.1.1.7",
+      "x": 15,
+      "y": 10
+    }, {
+      "name": "720.1_Avotsto_8",
+      "type": "light",
+      "address": "@1.1.1.8",
+      "x": 12,
+      "y": 10
+    }, {
+      "name": "720.1_Avotsto_9",
+      "type": "light",
+      "address": "@1.1.1.9",
+      "x": 12,
+      "y": 14
+    }, {
+      "name": "720.1_Avotsto_10",
+      "type": "light",
+      "address": "@1.1.1.10",
+      "x": 9,
+      "y": 14
+    }, {
+      "name": "720.1_Avotsto_11",
+      "type": "light",
+      "address": "@1.1.1.11",
+      "x": 9,
+      "y": 10
+    }, {
+      "name": "720.1_Avotsto_MS1",
+      "type": "ms",
+      "address": "@1.1.1.48"
+    }, {
+      "name": "720.1_Avotsto_MS3",
+      "type": "ms",
+      "address": "@1.1.1.49"
+    }, {
+      "name": "720.1_Avotsto_MS2",
+      "type": "ms",
+      "address": "@1.1.1.50"
+    }, {
+      "name": "720.1_Avotsto_P2",
+      "type": "button",
+      "address": "@1.1.1.55"
+    }, {
+      "name": "720.1_Avotsto_P1",
+      "type": "button",
+      "address": "@1.1.1.57"
+    }]
+  }, {
+    "id": "7202",
+    "name": "Main Right",
+    "devices": [{
+      "name": "720.2_Avotsto_1",
+      "type": "light",
+      "address": "@1.1.1.12",
+      "x": 6,
+      "y": 14
+    }, {
+      "name": "720.2_Avotsto_2",
+      "type": "light",
+      "address": "@1.1.1.13",
+      "x": 6,
+      "y": 10
+    }, {
+      "name": "720.2_Avotsto_3",
+      "type": "light",
+      "address": "@1.1.1.14",
+      "x": 3,
+      "y": 10
+    }, {
+      "name": "720.2_Avotsto_4",
+      "type": "light",
+      "address": "@1.1.1.15",
+      "x": 3,
+      "y": 14
+    }, {
+      "name": "720.2_Avotsto_5",
+      "type": "light",
+      "address": "@1.1.1.16",
+      "x": 1,
+      "y": 14
+    }, {
+      "name": "720.2_Avotsto_6",
+      "type": "light",
+      "address": "@1.1.1.17",
+      "x": 1,
+      "y": 10
+    }, {
+      "name": "720.2_Avotsto_MS1",
+      "type": "ms",
+      "address": "@1.1.1.47"
+    }, {
+      "name": "720.2_Avotsto_P1",
+      "type": "button",
+      "address": "@1.1.1.53"
+    }, {
+      "name": "720.2_Avotsto_P2",
+      "type": "button",
+      "address": "@1.1.1.54"
+    }]
+  }]
+}
