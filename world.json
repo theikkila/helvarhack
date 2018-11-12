@@ -131,15 +131,21 @@
     "devices": [{
       "name": "725_Neuvottelu_1_etu",
       "type": "light",
-      "address": "@1.1.2.1"
+      "address": "@1.1.2.1",
+      "x": 10,
+      "y": -7
     }, {
       "name": "725_Neuvottelu_2_kesk",
       "type": "light",
-      "address": "@1.1.2.2"
+      "address": "@1.1.2.2",
+      "x": 10,
+      "y": -5
     }, {
       "name": "725_Neuvottelu_3_taka",
       "type": "light",
-      "address": "@1.1.2.3"
+      "address": "@1.1.2.3",
+      "x": 10,
+      "y": -3
     }, {
       "name": "725_Neuvottelu_MS1",
       "type": "ms",
@@ -155,39 +161,57 @@
     "devices": [{
       "name": "726_Neuvottelu_1_etu_kesk",
       "type": "light",
-      "address": "@1.1.1.18"
+      "address": "@1.1.1.18",
+      "x": 16,
+      "y": -5
     }, {
       "name": "726_Neuvottelu_2_etu_vas",
       "type": "light",
-      "address": "@1.1.1.19"
+      "address": "@1.1.1.19",
+      "x": 16,
+      "y": -7
     }, {
       "name": "726_Neuvottelu_3_etu_oik",
       "type": "light",
-      "address": "@1.1.1.20"
+      "address": "@1.1.1.20",
+      "x": 16,
+      "y": -3
     }, {
       "name": "726_Neuvottelu_4_taka_vas",
       "type": "light",
-      "address": "@1.1.1.21"
+      "address": "@1.1.1.21",
+      "x": 22,
+      "y": -7
     }, {
       "name": "726_Neuvottelu_5_taka_kesk",
       "type": "light",
-      "address": "@1.1.1.22"
+      "address": "@1.1.1.22",
+      "x": 22,
+      "y": -5
     }, {
       "name": "726_Neuvottelu_6_taka_oik",
       "type": "light",
-      "address": "@1.1.1.23"
+      "address": "@1.1.1.23",
+      "x": 22,
+      "y": -3
     }, {
       "name": "726_Neuvottelu_7_kesk_vas",
       "type": "light",
-      "address": "@1.1.1.24"
+      "address": "@1.1.1.24",
+      "x": 19,
+      "y": -7
     }, {
       "name": "726_Neuvottelu_8_kesk_kesk",
       "type": "light",
-      "address": "@1.1.1.25"
+      "address": "@1.1.1.25",
+      "x": 19,
+      "y": -5
     }, {
       "name": "726_Neuvottelu_9_kesk_oik",
       "type": "light",
-      "address": "@1.1.1.26"
+      "address": "@1.1.1.26",
+      "x": 19,
+      "y": -3
     }, {
       "name": "726_Neuvottelu_MS1",
       "type": "ms",
@@ -203,19 +227,23 @@
     "devices": [{
       "name": "729_Puhelin_1",
       "type": "light",
-      "address": "@1.1.2.15"
+      "address": "@1.1.2.15",
+      "x": 17,
+      "y": 1
     }, {
       "name": "729_Puhelin_MS1",
       "type": "ms",
       "address": "@1.1.2.49"
     }]
   }, {
-    "name": "730",
+    "id": "730",
     "name": "CEO's Office",
     "devices": [{
       "name": "730_Puhelin_1",
       "type": "light",
-      "address": "@1.1.2.16"
+      "address": "@1.1.2.16",
+      "x": 24,
+      "y": 0
     }, {
       "name": "730_Puhelin_MS1",
       "type": "ms",
@@ -227,7 +255,9 @@
     "devices": [{
       "name": "732_ATK_1",
       "type": "light",
-      "address": "@1.1.2.17"
+      "address": "@1.1.2.17",
+      "x": 24,
+      "y": 6
     }, {
       "name": "732_ATK_MS1",
       "type": "ms",
@@ -354,13 +384,13 @@
       "name": "720.2_Avotsto_5",
       "type": "light",
       "address": "@1.1.1.16",
-      "x": 1,
+      "x": 0,
       "y": 14
     }, {
       "name": "720.2_Avotsto_6",
       "type": "light",
       "address": "@1.1.1.17",
-      "x": 1,
+      "x": 0,
       "y": 10
     }, {
       "name": "720.2_Avotsto_MS1",

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bacon.js/2.0.9/Bacon.min.js"></script>
+    <style media="screen">
+      .visualizer {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas class="visualizer" width="640" height="100"></canvas>
+    <div id="root"></div>
+    <script>
+    var State = function(initialState) {
+      this.subscribers = [];
+      this.s = initialState;
+      this.subscribe = function(cb) {
+        this.subscribers.push(cb);
+        cb(this.s);
+      };
+      this.mutate = function(f) {
+        this.s = Object.assign(this.s, f(this.s));
+        this.subscribers.forEach(subscriber => {
+          subscriber(Object.assign({}, this.s));
+        })
+      };
+      return this;
+    }
+
+    var state = new State({groups: [], cgroups: []});
+
+    axios.get("/api/world")
+    .then(world => world.data)
+    .then(world => state.mutate((oldState) => world))
+
+    const setLight = (address, value, fade) => {
+      return axios.put(`/api/lights/${address}`, {level: value, fade: fade})
+    }
+    const setGroup = (group, value, fade) => {
+      console.log("GRO", value, fade)
+      return axios.put(`/api/groups/${group}`, {level: value, fade: fade})
+    }
+    WIDTH = 1200
+    HEIGHT = 200
+    //INDEX = 17;
+    INDEX = 1;
+
+    var b = new Bacon.Bus();
+    b.filter(v => v > 10)
+    .onValue(v => {
+      //setGroup("7202", v/2, 0)
+    })
+
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+
+var colors = [ 'day' , 'night'];
+var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;'
+
+    var recognition = new SpeechRecognition();
+    var speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar, 1);
+    recognition.grammars = speechRecognitionList;
+    //recognition.continuous = false;
+    recognition.lang = 'fi-FI';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    var bg = document.querySelector('html');
+
+    document.body.onclick = function() {
+      recognition.start();
+      console.log('Ready to receive a color command.');
+    }
+
+    recognition.onresult = function(event) {
+      var color = event.results[0][0].transcript;
+      console.log(color)
+      switch (color) {
+        case 'päivä':
+          setGroup("7202", 100, 70)
+          setGroup("7201", 100, 70)
+          setGroup("723", 100, 70);
+          break;
+        case 'ilta':
+          setGroup("7202", 1, 70)
+          setGroup("7201", 1, 70)
+          setGroup("723", 1, 70)
+          break;
+        case 'pimeys':
+          setGroup("7202", 0, 70)
+          setGroup("7201", 0, 70)
+          setGroup("723", 0, 70)
+
+          break;
+
+    }
+
+      setTimeout(() => {
+        recognition.start();
+        console.log("READY")
+      }, 100)
+      //diagnostic.textContent = 'Result received: ' + color;
+      //bg.style.backgroundColor = color;
+    }
+
+    var onque = false
+    //var high = b.filter(value => value > 200)
+/*
+    high.filter(v => !onque).onValue(v => {
+      console.log(v)
+      onque = true;
+      Promise.all([
+        setGroup("7202", 50, 70),
+        setGroup("7201", 50, 70),
+        setGroup("723", 50, 70)
+      ])
+      .then(a => {
+        return Promise.all([
+          setGroup("7202", 1, 300),
+          setGroup("7201", 1, 300),
+          setGroup("723", 1, 300)
+        ])
+      })
+      .then(a => {
+        setTimeout(() => {
+          onque = false;
+        }, 1000)
+      })
+
+    })
+    */
+
+
+
+    navigator.getUserMedia = (navigator.getUserMedia ||
+                          navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                          navigator.msGetUserMedia);
+
+    var canvas = document.querySelector('.visualizer');
+    var canvasCtx = canvas.getContext("2d");
+
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var analyser = audioCtx.createAnalyser();
+    navigator.getUserMedia (
+      // constraints - only audio needed for this app
+      {
+         audio: true
+      },
+
+      // Success callback
+      function(stream) {
+        var source = audioCtx.createMediaStreamSource(stream);
+        source.connect(analyser);
+        //analyser.connect(audioCtx.destination);
+
+        analyser.fftSize = 256;
+        var bufferLength = analyser.frequencyBinCount;
+        var dataArray = new Uint8Array(bufferLength);
+        const draw = () => {
+          var drawVisual = requestAnimationFrame(draw);
+          //analyser.getByteTimeDomainData(dataArray);
+          analyser.getByteFrequencyData(dataArray);
+
+          canvasCtx.closePath()
+          //var v = Math.max(Math.min(dataArray[INDEX]*0.5, 100), 10)
+          b.push(dataArray[INDEX])
+
+          canvas.width = dataArray[INDEX];
+        };
+
+        draw();
+
+
+      },
+
+      // Error callback
+      function(err) {
+         console.log('The following gUM error occured: ' + err);
+      }
+   );
+
+
+    </script>
+    <script type="text/babel">
+
+      const Light = (props) => {
+        return (
+          <div>
+            <h3>{props.data.name}</h3>
+            <input type="range" onChange={(e) => setLight(props.data.address, e.target.value) } min="0" max="100" />
+          </div>
+        )
+      }
+
+      const Group = (props) => {
+        const lights = props.data.devices.filter(d => d.type === 'light').map(l => <Light data={l} />)
+          return (
+            <div>
+              <h1>{props.data.name}</h1>
+              <small>{props.data.id}</small>
+              <input type="range" onChange={(e) => setGroup(props.data.id, e.target.value) } min="0" max="100" />
+              {lights}
+            </div>
+          )
+      }
+
+      const CGroup = (props) => {
+        console.log(props.data)
+          return (
+            <div>
+              <h1>{props.data.name}</h1>
+              <input type="range" onChange={(e) => {
+                props.data.lights.forEach(l => {
+                  setLight(l, e.target.value)
+                })
+                props.data.groups.forEach(g => {
+                  setGroup(g, e.target.value)
+                })
+              } } min="0" max="100" />
+            </div>
+          )
+      }
+
+      const World = (props) => {
+        console.log(props)
+        const cgroups = props.data.cgroups.map(g => <CGroup key={g.name} data={g} />)
+        const groups = props.data.groups.map(g => <Group key={g.id} data={g} />)
+        return <div>{cgroups}{groups}</div>
+      }
+
+      state.subscribe((world) => {
+        ReactDOM.render(
+          <World data={world} />,
+          document.getElementById('root')
+        );
+      })
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+  </body>
+</html>

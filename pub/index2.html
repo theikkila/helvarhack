@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      var State = function(initialState) {
+        this.subscribers = [];
+        this.s = initialState;
+        this.subscribe = function(cb) {
+          this.subscribers.push(cb);
+          cb(this.s);
+        };
+        this.mutate = function(f) {
+          this.s = Object.assign(this.s, f(this.s));
+          this.subscribers.forEach(subscriber => {
+            subscriber(Object.assign({}, this.s));
+          })
+        };
+        return this;
+      }
+
+      var state = new State({groups: [], cgroups: []});
+
+      axios.get("/api/world")
+      .then(world => world.data)
+      .then(world => state.mutate((oldState) => world))
+
+      const setLight = (address, value) => {
+        axios.put(`/api/lights/${address}`, {level: value})
+      }
+      const setGroup = (group, value) => {
+        axios.put(`/api/groups/${group}`, {level: value})
+      }
+
+      const Light = (props) => {
+        return (
+          <div>
+            <h3>{props.data.name}</h3>
+            <input type="range" onChange={(e) => setLight(props.data.address, e.target.value) } min="0" max="100" />
+          </div>
+        )
+      }
+
+      const Group = (props) => {
+        const lights = props.data.devices.filter(d => d.type === 'light').map(l => <Light data={l} />)
+          return (
+            <div>
+              <h1>{props.data.name}</h1>
+              <small>{props.data.id}</small>
+              <input type="range" onChange={(e) => setGroup(props.data.id, e.target.value) } min="0" max="100" />
+              {lights}
+            </div>
+          )
+      }
+
+      const CGroup = (props) => {
+        console.log(props.data)
+          return (
+            <div>
+              <h1>{props.data.name}</h1>
+              <input type="range" onChange={(e) => {
+                props.data.lights.forEach(l => {
+                  setLight(l, e.target.value)
+                })
+                props.data.groups.forEach(g => {
+                  setGroup(g, e.target.value)
+                })
+              } } min="0" max="100" />
+            </div>
+          )
+      }
+
+      const World = (props) => {
+        console.log(props)
+        const cgroups = props.data.cgroups.map(g => <CGroup key={g.name} data={g} />)
+        const groups = props.data.groups.map(g => <Group key={g.id} data={g} />)
+        return <div>{cgroups}{groups}</div>
+      }
+
+      state.subscribe((world) => {
+        ReactDOM.render(
+          <World data={world} />,
+          document.getElementById('root')
+        );
+      })
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+  </body>
+</html>
